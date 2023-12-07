@@ -1,30 +1,29 @@
 #include "lists.h"
 
 /**
- * pop_listint - deletes the head node of
- * a linked list
- * @head: head of a list.
+ * sum_dlistint - returns the sum of all the data (n)
+ * of a doubly linked list
  *
- * Return: head node's data.
+ * @head: head of the list
+ * Return: sum of the data
  */
-int pop_listint(listint_t **head)
+int sum_dlistint(dlistint_t *head)
 {
-	int hnode;
-	listint_t *h;
-	listint_t *curr;
+	int sum;
 
-	if (*head == NULL)
-		return (0);
+	sum = 0;
 
-	curr = *head;
+	if (head != NULL)
+	{
+		while (head->prev != NULL)
+			head = head->prev;
 
-	hnode = curr->n;
+		while (head != NULL)
+		{
+			sum += head->n;
+			head = head->next;
+		}
+	}
 
-	h = curr->next;
-
-	free(curr);
-
-	*head = h;
-
-	return (hnode);
+	return (sum);
 }
